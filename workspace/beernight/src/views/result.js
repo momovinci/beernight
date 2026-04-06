@@ -16,29 +16,25 @@ export function renderResultView() {
 
   app.innerHTML = `
     <div class="container">
-      <!-- 남은 질문 (칩 형태 - 타이틀 위) -->
-      <div style="text-align: center; margin-bottom: 16px;">
-        <span style="display: inline-block; background-color: #BAD4FF; color: var(--content-highemphasis1); padding: 6px 12px; border-radius: 4px; font-size: 12px; font-weight: 600;">
+      <div class="header" style="display: flex; justify-content: space-between; align-items: center;">
+        <h1>랜덤 결과</h1>
+        <span style="display: inline-block; background-color: #EAF3FF; color: var(--content-highemphasis1); padding: 6px 12px; border-radius: 4px; font-size: 12px; font-weight: 600;">
           📍 남은 질문: ${remaining}개
         </span>
-      </div>
-
-      <div class="header">
-        <h1>랜덤 결과</h1>
       </div>
 
       <!-- 좌우 레이아웃: 질문(좌측) / 답변자(우측) -->
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px;">
         <!-- 왼쪽: 질문 카드 -->
-        <section class="section" style="perspective: 1200px; margin-bottom: 0; height: 320px; padding: 24px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);">
+        <section class="section" style="perspective: 1200px; margin-bottom: 0; height: 320px; padding: 24px;">
           <div class="flip-card-container" style="position: relative; width: 100%; height: 100%; cursor: pointer;">
             <div class="flip-card" style="position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; animation: flipCard 0.8s ease-out forwards;">
               <!-- 앞면 (숫자) -->
-              <div class="flip-card-front" style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; align-items: center; justify-content: center; background: #BAD4FF; border-radius: 12px; color: white; font-size: 64px; font-weight: bold; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);">
+              <div class="flip-card-front" style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; align-items: center; justify-content: center; background: #BAD4FF; border-radius: 12px; color: white; font-size: 64px; font-weight: bold;">
                 ${currentQuestion.index + 1}
               </div>
               <!-- 뒷면 (질문) -->
-              <div class="flip-card-back" style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; align-items: center; justify-content: center; background: #E4E4E7; border-radius: 12px; color: var(--content-highemphasis1); font-size: 20px; font-weight: 600; padding: 24px; text-align: center; transform: rotateY(180deg); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);">
+              <div class="flip-card-back" style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; align-items: center; justify-content: center; background: #E4E4E7; border-radius: 12px; color: var(--content-highemphasis1); font-size: 20px; font-weight: 600; padding: 24px; text-align: center; transform: rotateY(180deg);">
                 ${currentQuestion.text}
               </div>
             </div>
@@ -46,7 +42,7 @@ export function renderResultView() {
         </section>
 
         <!-- 오른쪽: 답변자 목록 (좌우 배치) -->
-        <section class="section" style="margin-bottom: 0; height: 320px; padding: 24px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);">
+        <section class="section" style="margin-bottom: 0; height: 320px; padding: 24px; display: flex; align-items: center; justify-content: center;">
           <div style="display: flex; gap: 16px; width: 100%; height: 100%; align-items: center; justify-content: center;">
             ${currentAnswerers
               .map(
