@@ -24,23 +24,26 @@ export function renderSetupView() {
         <p class="text-secondary">질문과 답변자를 설정하고 게임을 시작하세요!</p>
       </div>
 
-      <!-- 질문 섹션 -->
-      <section class="section">
-        <h2>질문 목록 (최소 1개)</h2>
-        <div id="questions-list" class="mb-4"></div>
-        <button id="btn-add-question" class="btn btn-secondary w-full">
-          + 질문 추가
-        </button>
-      </section>
+      <!-- 좌우 레이아웃 (모바일에서는 1열, 데스크톱에서는 2열) -->
+      <div class="setup-two-column" style="display: grid; gap: 24px; margin-bottom: 24px;">
+        <!-- 질문 섹션 (좌측) -->
+        <section class="section">
+          <h2>질문 목록 (최소 1개)</h2>
+          <div id="questions-list" class="mb-4"></div>
+          <button id="btn-add-question" class="btn btn-secondary w-full">
+            + 질문 추가
+          </button>
+        </section>
 
-      <!-- 답변자 섹션 -->
-      <section class="section">
-        <h2>답변자 목록 (최소 2명)</h2>
-        <div id="answerers-list" class="mb-4"></div>
-        <button id="btn-add-answerer" class="btn btn-secondary w-full">
-          + 답변자 추가
-        </button>
-      </section>
+        <!-- 답변자 섹션 (우측) -->
+        <section class="section">
+          <h2>답변자 목록 (최소 2명)</h2>
+          <div id="answerers-list" class="mb-4"></div>
+          <button id="btn-add-answerer" class="btn btn-secondary w-full">
+            + 답변자 추가
+          </button>
+        </section>
+      </div>
 
       <!-- 하단 버튼 -->
       <div class="footer">
