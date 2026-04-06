@@ -171,6 +171,7 @@ input[type="text"]:focus {
   display: flex;
   align-items: center;
   justify-content: center;
+  animation: cardShuffle 0.8s ease-out;
 }
 
 .card:hover:not(:disabled) {
@@ -274,8 +275,9 @@ input[type="text"]:focus {
   height: 5px;
   background-color: var(--surface-primary);
   border-radius: 50%;
-  margin-right: 8px;
+  margin-left: 8px;
   animation: pulse 2s ease-in-out infinite;
+  flex-shrink: 0;
 }
 
 @keyframes pulse {
@@ -284,8 +286,27 @@ input[type="text"]:focus {
     opacity: 1;
   }
   50% {
-    box-shadow: 0 0 0 8px rgba(249, 8, 115, 0.2);
+    box-shadow: 0 0 8px 6px rgba(249, 8, 115, 0.3);
     opacity: 0.8;
+  }
+}
+
+/* 카드 셔플 애니메이션 */
+@keyframes cardShuffle {
+  0% {
+    opacity: 0.5;
+    transform: scale(0.8) translateY(-20px);
+  }
+  40% {
+    opacity: 0.7;
+  }
+  80% {
+    opacity: 0.95;
+    transform: scale(0.95) translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
   }
 }
 
