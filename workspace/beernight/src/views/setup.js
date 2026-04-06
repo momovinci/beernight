@@ -152,11 +152,13 @@ function attachEventListeners() {
     if (e.target.classList.contains('question-input')) {
       const idx = parseInt(e.target.dataset.index)
       updateQuestion(idx, e.target.value)
+      updateStartButtonState()
     }
     if (e.target.classList.contains('answerer-name-input')) {
       const idx = parseInt(e.target.dataset.index)
       const answerer = getState('answerers')[idx]
       updateAnswerer(idx, e.target.value, answerer.photo)
+      updateStartButtonState()
     }
   }
 
