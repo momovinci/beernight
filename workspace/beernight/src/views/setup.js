@@ -102,9 +102,10 @@ function renderAnswererList() {
   container.innerHTML = answerers
     .map(
       (a, idx) => `
-        <div class="list-item flex-col" style="align-items: flex-start;">
-          <div class="flex gap-4 w-full">
-            <div style="flex: 1;">
+        <div class="list-item flex-col" style="position: relative; align-items: center;">
+          <button class="btn btn-delete answerer-delete" data-index="${idx}" style="position: absolute; top: 12px; right: 12px; width: auto; padding: 4px 8px;">×</button>
+          <div class="flex gap-4 w-full" style="align-items: center;">
+            <div style="flex: 0 0 auto;">
               <input
                 type="file"
                 accept="image/*"
@@ -124,18 +125,15 @@ function renderAnswererList() {
                 }
               </button>
             </div>
-            <div style="flex: 3;">
+            <div style="flex: 1;">
               <input
                 type="text"
                 class="answerer-name-input"
                 data-index="${idx}"
                 value="${a.name}"
                 placeholder="이름을 입력하세요"
-                style="width: 100%; margin-bottom: 8px;"
+                style="width: 100%;"
               />
-              <button class="btn btn-delete answerer-delete" data-index="${idx}" style="width: 100%;">
-                삭제
-              </button>
             </div>
           </div>
         </div>
