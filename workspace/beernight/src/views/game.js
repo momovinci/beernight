@@ -57,6 +57,7 @@ function renderCards() {
           class="card question-card"
           data-index="${idx}"
           ${isQuestionUsed(idx) ? 'disabled' : ''}
+          style="animation: cardShuffle 0.8s ease-out;"
         >
           <span class="card-number">${idx + 1}</span>
         </button>

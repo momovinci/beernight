@@ -171,7 +171,6 @@ input[type="text"]:focus {
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: cardShuffle 0.8s ease-out;
 }
 
 .card:hover:not(:disabled) {
