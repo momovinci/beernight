@@ -17,44 +17,47 @@ export function renderResultView() {
   app.innerHTML = `
     <div class="container">
       <div class="header">
-        <h1>🎉 매칭 결과!</h1>
+        <h1>랜덤 결과</h1>
       </div>
 
-      <!-- 질문 표시 (플립 애니메이션) -->
-      <section class="section" style="perspective: 1000px;">
-        <div class="flip-card-container" style="position: relative; width: 100%; height: 200px; cursor: pointer;">
-          <div class="flip-card" style="position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; animation: flipCard 0.8s ease-out forwards;">
-            <!-- 앞면 (숫자) -->
-            <div class="flip-card-front" style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--surface-primary) 0%, rgba(249, 8, 115, 0.8) 100%); border-radius: 12px; color: white; font-size: 64px; font-weight: bold;">
-              ${currentQuestion.index + 1}
-            </div>
-            <!-- 뒷면 (질문) -->
-            <div class="flip-card-back" style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--surface-secondary) 0%, rgba(64, 96, 255, 0.8) 100%); border-radius: 12px; color: white; font-size: 20px; font-weight: 600; padding: 24px; text-align: center; transform: rotateY(180deg);">
-              ${currentQuestion.text}
+      <!-- 좌우 레이아웃: 질문(좌측) / 답변자(우측) -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px; align-items: start;">
+        <!-- 왼쪽: 질문 카드 -->
+        <section class="section" style="perspective: 1000px; margin-bottom: 0;">
+          <div class="flip-card-container" style="position: relative; width: 100%; height: 200px; cursor: pointer;">
+            <div class="flip-card" style="position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; animation: flipCard 0.8s ease-out forwards;">
+              <!-- 앞면 (숫자) -->
+              <div class="flip-card-front" style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--surface-primary) 0%, rgba(249, 8, 115, 0.8) 100%); border-radius: 12px; color: white; font-size: 64px; font-weight: bold;">
+                ${currentQuestion.index + 1}
+              </div>
+              <!-- 뒷면 (질문) -->
+              <div class="flip-card-back" style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--surface-secondary) 0%, rgba(64, 96, 255, 0.8) 100%); border-radius: 12px; color: white; font-size: 20px; font-weight: 600; padding: 24px; text-align: center; transform: rotateY(180deg);">
+                ${currentQuestion.text}
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- 답변자 페어 -->
-      <section style="margin-bottom: 32px;">
-        <div class="flex gap-4 flex-col" style="flex-direction: row;">
-          ${currentAnswerers
-            .map(
-              answerer => `
-            <div class="profile" style="flex: 1;">
-              ${
-                answerer.photo
-                  ? `<img src="${answerer.photo}" class="profile-avatar" alt="${answerer.name}" />`
-                  : `<div class="profile-avatar" style="background-color: var(--surface-default); display: flex; align-items: center; justify-content: center; font-size: 40px;">👤</div>`
-              }
-              <p class="profile-name">${answerer.name}</p>
-            </div>
-          `
-            )
-            .join('')}
-        </div>
-      </section>
+        <!-- 오른쪽: 답변자 목록 (세로 배치) -->
+        <section style="margin-bottom: 0;">
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            ${currentAnswerers
+              .map(
+                answerer => `
+              <div class="profile" style="text-align: center;">
+                ${
+                  answerer.photo
+                    ? `<img src="${answerer.photo}" class="profile-avatar" alt="${answerer.name}" />`
+                    : `<div class="profile-avatar" style="background-color: var(--surface-default); display: flex; align-items: center; justify-content: center; font-size: 40px;">👤</div>`
+                }
+                <p class="profile-name">${answerer.name}</p>
+              </div>
+            `
+              )
+              .join('')}
+          </div>
+        </section>
+      </div>
 
       <!-- 남은 질문 -->
       <div class="text-center mb-6">
