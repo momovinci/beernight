@@ -20,7 +20,7 @@ export function renderSetupView() {
   app.innerHTML = `
     <div class="container">
       <div class="header" style="display: flex; justify-content: space-between; align-items: center;">
-        <h1>🎲 랜덤질문 설정하기</h1>
+        <h1>랜덤질문 설정하기</h1>
         <button id="btn-start-game" class="btn btn-primary" style="font-size: 14px; padding: 10px 20px; white-space: nowrap;">
           랜덤뽑기 시작
         </button>
