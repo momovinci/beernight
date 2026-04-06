@@ -30,8 +30,8 @@ export function renderSetupView() {
       <div class="setup-two-column" style="display: grid; gap: 24px; margin-bottom: 24px;">
         <!-- 질문 섹션 (좌측) -->
         <section class="section">
-          <ion-icon name="chatbubble-ellipses-outline" style="font-size: 32px; color: var(--content-lowemphasis1); display: block; margin-bottom: 12px;"></ion-icon>
-          <h2><span style="color: var(--content-lowemphasis1); margin-right: 8px;">💬</span>질문 목록 (최소 1개)</h2>
+          <ion-icon name="chatbubble-ellipses-outline" style="font-size: 24px; color: var(--content-lowemphasis1); display: block; margin-bottom: 12px;"></ion-icon>
+          <h2>질문 목록 (최소 1개)</h2>
           <div id="questions-list" class="mb-4"></div>
           <button id="btn-add-question" class="btn btn-secondary">
             + 질문 추가
@@ -40,8 +40,8 @@ export function renderSetupView() {
 
         <!-- 답변자 섹션 (우측) -->
         <section class="section">
-          <ion-icon name="person-outline" style="font-size: 32px; color: var(--content-lowemphasis1); display: block; margin-bottom: 12px;"></ion-icon>
-          <h2><span style="color: var(--content-lowemphasis1); margin-right: 8px;">👥</span>답변자 목록 (최소 2명)</h2>
+          <ion-icon name="person-outline" style="font-size: 24px; color: var(--content-lowemphasis1); display: block; margin-bottom: 12px;"></ion-icon>
+          <h2>답변자 목록 (최소 2명)</h2>
           <div id="answerers-list" class="mb-4"></div>
           <button id="btn-add-answerer" class="btn btn-secondary">
             + 답변자 추가
