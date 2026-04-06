@@ -29,7 +29,7 @@ export function renderResultView() {
               ${currentQuestion.index + 1}
             </div>
             <!-- 뒷면 (질문) -->
-            <div class="flip-card-back" style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--surface-secondary) 0%, rgba(64, 96, 255, 0.8) 100%); border-radius: 12px; color: white; font-size: 20px; font-weight: 600; padding: 24px; text-align: center; transform: rotateX(180deg);">
+            <div class="flip-card-back" style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--surface-secondary) 0%, rgba(64, 96, 255, 0.8) 100%); border-radius: 12px; color: white; font-size: 20px; font-weight: 600; padding: 24px; text-align: center; transform: rotateY(180deg);">
               ${currentQuestion.text}
             </div>
           </div>
