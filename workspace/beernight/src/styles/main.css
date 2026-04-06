@@ -267,6 +267,28 @@ input[type="text"]:focus {
   margin-top: 32px;
 }
 
+/* 펄싱 도트 */
+.pulse-dot {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  background-color: var(--surface-primary);
+  border-radius: 50%;
+  margin-right: 8px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 var(--surface-primary);
+    opacity: 1;
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(249, 8, 115, 0.2);
+    opacity: 0.8;
+  }
+}
+
 /* 반응형 레이아웃 */
 @media (max-width: 768px) {
   /* 모바일: 질문과 답변자 목록을 1열로 표시 */

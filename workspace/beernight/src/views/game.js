@@ -19,7 +19,7 @@ export function renderGameView() {
   app.innerHTML = `
     <div class="container">
       <div class="header">
-        <h1>🎮 게임 진행 중</h1>
+        <h1><span class="pulse-dot"></span>랜덤질문 뽑기 진행 중</h1>
         <p class="text-secondary">📍 남은 질문 <strong>${remaining}</strong>개</p>
       </div>
 
