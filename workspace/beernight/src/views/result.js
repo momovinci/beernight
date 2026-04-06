@@ -20,11 +20,20 @@ export function renderResultView() {
         <h1>🎉 매칭 결과!</h1>
       </div>
 
-      <!-- 질문 표시 -->
-      <section class="section">
-        <h2 style="margin-bottom: 24px; text-align: center; font-size: 20px;">
-          ${currentQuestion.text}
-        </h2>
+      <!-- 질문 표시 (플립 애니메이션) -->
+      <section class="section" style="perspective: 1000px;">
+        <div class="flip-card-container" style="position: relative; width: 100%; height: 200px; cursor: pointer;">
+          <div class="flip-card" style="position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; animation: flipCard 0.8s ease-out forwards;">
+            <!-- 앞면 (숫자) -->
+            <div class="flip-card-front" style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--surface-primary) 0%, rgba(249, 8, 115, 0.8) 100%); border-radius: 12px; color: white; font-size: 64px; font-weight: bold;">
+              ${currentQuestion.index + 1}
+            </div>
+            <!-- 뒷면 (질문) -->
+            <div class="flip-card-back" style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--surface-secondary) 0%, rgba(64, 96, 255, 0.8) 100%); border-radius: 12px; color: white; font-size: 20px; font-weight: 600; padding: 24px; text-align: center; transform: rotateX(180deg);">
+              ${currentQuestion.text}
+            </div>
+          </div>
+        </div>
       </section>
 
       <!-- 답변자 페어 -->

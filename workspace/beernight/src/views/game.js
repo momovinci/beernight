@@ -16,6 +16,13 @@ export function renderGameView() {
   const questions = getState('questions')
   const remaining = getRemainingQuestionsCount()
 
+  // 카드 숫자 순서 랜덤화
+  const cardNumbers = Array.from({ length: questions.length }, (_, i) => i + 1)
+  const randomizedNumbers = cardNumbers.sort(() => Math.random() - 0.5)
+
+  // 전역 변수로 저장 (renderCards에서 사용)
+  window.randomizedCardNumbers = randomizedNumbers
+
   app.innerHTML = `
     <div class="container">
       <div class="header">
@@ -49,6 +56,7 @@ export function renderGameView() {
 function renderCards() {
   const questions = getState('questions')
   const container = document.getElementById('cards-grid')
+  const randomizedNumbers = window.randomizedCardNumbers || Array.from({ length: questions.length }, (_, i) => i + 1)
 
   container.innerHTML = questions
     .map(
@@ -59,7 +67,7 @@ function renderCards() {
           ${isQuestionUsed(idx) ? 'disabled' : ''}
           style="animation: cardShuffle 0.8s ease-out;"
         >
-          <span class="card-number">${idx + 1}</span>
+          <span class="card-number">${randomizedNumbers[idx]}</span>
         </button>
       `
     )
