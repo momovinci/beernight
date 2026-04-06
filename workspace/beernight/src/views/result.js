@@ -18,7 +18,7 @@ export function renderResultView() {
     <div class="container">
       <div class="header" style="display: flex; justify-content: space-between; align-items: center;">
         <h1>랜덤 결과</h1>
-        <span style="display: inline-block; background-color: #EAF3FF; color: var(--content-highemphasis1); padding: 6px 12px; border-radius: 4px; font-size: 12px; font-weight: 600;">
+        <span style="display: inline-block; background-color: white; color: var(--content-highemphasis1); padding: 6px 12px; border-radius: 4px; font-size: 12px; font-weight: 600;">
           📍 남은 질문: ${remaining}개
         </span>
       </div>

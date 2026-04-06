@@ -25,12 +25,14 @@ export function renderGameView() {
 
   app.innerHTML = `
     <div class="container">
-      <div class="header">
+      <div class="header" style="display: flex; justify-content: space-between; align-items: center;">
         <h1 style="display: flex; align-items: center;">
           랜덤질문 뽑기 진행 중
-          <span class="pulse-dot"></span>
+          <span class="pulse-dot" style="margin-left: 16px;"></span>
         </h1>
-        <p class="text-secondary">📍 남은 질문 <strong>${remaining}</strong>개</p>
+        <span style="display: inline-block; background-color: white; color: var(--content-highemphasis1); padding: 6px 12px; border-radius: 4px; font-size: 12px; font-weight: 600;">
+          📍 남은 질문: ${remaining}개
+        </span>
       </div>
 
       <div id="cards-grid" class="grid mb-6"></div>
