@@ -5,7 +5,8 @@ let appState = {
   usedQuestionIndexes: new Set(),
   currentView: 'setup',
   currentQuestion: null,
-  currentAnswerers: null
+  currentAnswerers: null,
+  previousAnswerers: null
 }
 
 // 상태 변경 리스너들
@@ -124,15 +125,33 @@ export function selectQuestion(index) {
 }
 
 /**
- * 랜덤으로 2명의 답변자 선택
+ * 랜덤으로 2명의 답변자 선택 (이전 선택자 제외)
  */
 export function selectAnswerers() {
   if (appState.answerers.length < 2) {
     appState.currentAnswerers = appState.answerers.slice(0, 2)
   } else {
-    const shuffled = [...appState.answerers].sort(() => Math.random() - 0.5)
-    appState.currentAnswerers = shuffled.slice(0, 2)
+    // 이전에 선택된 답변자를 제외한 풀 생성
+    let answererPool = appState.answerers
+
+    if (appState.previousAnswerers && appState.previousAnswerers.length === 2) {
+      // 이전 선택자의 id를 구해서 제외
+      const prevIds = new Set(appState.previousAnswerers.map(a => a.id))
+      answererPool = appState.answerers.filter(a => !prevIds.has(a.id))
+    }
+
+    // 풀에 2명 이상이 있으면 random select, 없으면 전체에서 선택
+    if (answererPool.length >= 2) {
+      const shuffled = answererPool.sort(() => Math.random() - 0.5)
+      appState.currentAnswerers = shuffled.slice(0, 2)
+    } else {
+      const shuffled = [...appState.answerers].sort(() => Math.random() - 0.5)
+      appState.currentAnswerers = shuffled.slice(0, 2)
+    }
   }
+
+  // 현재 선택된 답변자를 이전 선택으로 저장
+  appState.previousAnswerers = appState.currentAnswerers ? [...appState.currentAnswerers] : null
   notifyListeners('currentAnswerers', appState.currentAnswerers)
 }
 
@@ -143,6 +162,7 @@ export function resetGameState() {
   appState.usedQuestionIndexes.clear()
   appState.currentQuestion = null
   appState.currentAnswerers = null
+  appState.previousAnswerers = null
   notifyListeners('usedQuestionIndexes', appState.usedQuestionIndexes)
 }
 
@@ -156,7 +176,8 @@ export function resetAll() {
     usedQuestionIndexes: new Set(),
     currentView: 'setup',
     currentQuestion: null,
-    currentAnswerers: null
+    currentAnswerers: null,
+    previousAnswerers: null
   }
   notifyListeners('questions', appState.questions)
   notifyListeners('answerers', appState.answerers)
