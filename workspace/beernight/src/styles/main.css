@@ -34,8 +34,9 @@ body {
 }
 
 .btn-secondary {
-  background-color: var(--surface-secondary);
-  color: white;
+  background-color: #4060ff0a;
+  color: var(--surface-secondary);
+  border: var(--surface-secondary) 1px solid;
 }
 
 .btn-delete {
@@ -43,8 +44,14 @@ body {
   color: var(--content-error);
   font-size: 20px;
   padding: 4px 8px;
-  border: 1px solid var(--border-error);
+  border: none;
   border-radius: 4px;
+}
+
+.btn-photo {
+  background-color: white;
+  color: var(--content-helper1);
+  border: 2px dotted var(--border-base);
 }
 
 /* 입력 필드 */
@@ -90,7 +97,7 @@ input[type="text"]:focus {
 /* 섹션 */
 .section {
   background-color: var(--surface-elevation1);
-  border: 1px solid var(--border-base);
+  border: none;
   border-radius: 12px;
   padding: 24px;
   margin-bottom: 24px;

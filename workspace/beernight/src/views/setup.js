@@ -30,7 +30,7 @@ export function renderSetupView() {
         <section class="section">
           <h2>질문 목록 (최소 1개)</h2>
           <div id="questions-list" class="mb-4"></div>
-          <button id="btn-add-question" class="btn btn-secondary w-full">
+          <button id="btn-add-question" class="btn btn-secondary">
             + 질문 추가
           </button>
         </section>
@@ -39,7 +39,7 @@ export function renderSetupView() {
         <section class="section">
           <h2>답변자 목록 (최소 2명)</h2>
           <div id="answerers-list" class="mb-4"></div>
-          <button id="btn-add-answerer" class="btn btn-secondary w-full">
+          <button id="btn-add-answerer" class="btn btn-secondary">
             + 답변자 추가
           </button>
         </section>
@@ -113,7 +113,7 @@ function renderAnswererList() {
                 style="display: none;"
               />
               <button
-                class="btn btn-secondary answerer-photo-btn"
+                class="btn btn-photo answerer-photo-btn"
                 data-index="${idx}"
                 style="width: 100px; height: 100px; padding: 0; border-radius: 8px; overflow: hidden;"
               >
