@@ -34,7 +34,7 @@ export function renderResultView() {
                 ${currentQuestion.index + 1}
               </div>
               <!-- 뒷면 (질문) -->
-              <div class="flip-card-back" style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #E4E4E7; border-radius: 12px; color: var(--content-highemphasis1); font-size: 20px; font-weight: 600; padding: 24px; text-align: center; transform: rotateY(180deg); gap: 12px;">
+              <div class="flip-card-back" style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #e6edff; border-radius: 12px; color: var(--content-highemphasis1); font-size: 20px; font-weight: 600; padding: 24px; text-align: center; transform: rotateY(180deg); gap: 12px;">
                 <span style="font-size: 32px;">💬</span>
                 ${currentQuestion.text}
               </div>
