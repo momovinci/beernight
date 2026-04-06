@@ -147,7 +147,7 @@ function renderAnswererList() {
 function attachEventListeners() {
   const app = document.getElementById('app')
 
-  // 입력 이벤트 핸들러
+  // 입력 이벤트
   const handleInput = (e) => {
     if (e.target.classList.contains('question-input')) {
       const idx = parseInt(e.target.dataset.index)
@@ -160,7 +160,7 @@ function attachEventListeners() {
     }
   }
 
-  // 클릭 이벤트 핸들러
+  // 클릭 이벤트
   const handleClick = (e) => {
     if (e.target.classList.contains('question-delete')) {
       const idx = parseInt(e.target.dataset.index)
@@ -178,7 +178,7 @@ function attachEventListeners() {
 
     if (e.target.classList.contains('answerer-photo-btn')) {
       const idx = parseInt(e.target.dataset.index)
-      const fileInput = document.querySelector(
+      const fileInput = app.querySelector(
         `.answerer-photo-input[data-index="${idx}"]`
       )
       fileInput.click()
@@ -201,7 +201,7 @@ function attachEventListeners() {
     }
   }
 
-  // 파일 선택 이벤트 핸들러
+  // 파일 선택 이벤트
   const handleChange = (e) => {
     if (e.target.classList.contains('answerer-photo-input')) {
       const idx = parseInt(e.target.dataset.index)
@@ -213,29 +213,16 @@ function attachEventListeners() {
           const answerer = getState('answerers')[idx]
           updateAnswerer(idx, answerer.name, event.target.result)
           renderAnswererList()
-          // 렌더링 후 새 리스너 재등록
-          attachNewListeners()
         }
         reader.readAsDataURL(file)
       }
     }
   }
 
-  // 리스너 등록 (한 번만)
-  function attachNewListeners() {
-    // 기존 리스너 제거
-    app.removeEventListener('input', handleInput)
-    app.removeEventListener('click', handleClick)
-    app.removeEventListener('change', handleChange)
-
-    // 새로운 리스너 등록
-    app.addEventListener('input', handleInput)
-    app.addEventListener('click', handleClick)
-    app.addEventListener('change', handleChange)
-  }
-
-  // 초기 리스너 등록
-  attachNewListeners()
+  // app 컨테이너에 리스너 등록 (한 번만)
+  app.addEventListener('input', handleInput)
+  app.addEventListener('click', handleClick)
+  app.addEventListener('change', handleChange)
 }
 
 /**
