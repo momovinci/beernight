@@ -21,10 +21,10 @@ export function renderResultView() {
       </div>
 
       <!-- 좌우 레이아웃: 질문(좌측) / 답변자(우측) -->
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px; align-items: start;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px;">
         <!-- 왼쪽: 질문 카드 -->
-        <section class="section" style="perspective: 1000px; margin-bottom: 0;">
-          <div class="flip-card-container" style="position: relative; width: 100%; height: 200px; cursor: pointer;">
+        <section class="section" style="perspective: 1000px; margin-bottom: 0; height: 248px; padding: 24px;">
+          <div class="flip-card-container" style="position: relative; width: 100%; height: 100%; cursor: pointer;">
             <div class="flip-card" style="position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; animation: flipCard 0.8s ease-out forwards;">
               <!-- 앞면 (숫자) -->
               <div class="flip-card-front" style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--surface-primary) 0%, rgba(249, 8, 115, 0.8) 100%); border-radius: 12px; color: white; font-size: 64px; font-weight: bold;">
@@ -38,13 +38,13 @@ export function renderResultView() {
           </div>
         </section>
 
-        <!-- 오른쪽: 답변자 목록 (세로 배치) -->
-        <section style="margin-bottom: 0;">
-          <div style="display: flex; flex-direction: column; gap: 16px;">
+        <!-- 오른쪽: 답변자 목록 (좌우 배치) -->
+        <section class="section" style="margin-bottom: 0; height: 248px; padding: 24px; display: flex; align-items: center; justify-content: center;">
+          <div style="display: flex; gap: 16px; width: 100%; height: 100%; align-items: center; justify-content: center;">
             ${currentAnswerers
               .map(
-                answerer => `
-              <div class="profile" style="text-align: center;">
+                (answerer, idx) => `
+              <div class="profile" style="text-align: center; animation: fadeInLeft 0.6s ease-out ${idx * 0.2}s forwards; opacity: 0;">
                 ${
                   answerer.photo
                     ? `<img src="${answerer.photo}" class="profile-avatar" alt="${answerer.name}" />`
@@ -59,14 +59,19 @@ export function renderResultView() {
         </section>
       </div>
 
-      <!-- 남은 질문 -->
-      <div class="text-center mb-6">
-        <p class="text-secondary">📍 남은 질문: <strong>${remaining}</strong>개</p>
+      <!-- 남은 질문 (칩 형태) -->
+      <div style="text-align: center; margin-bottom: 32px;">
+        <span style="display: inline-block; background-color: var(--surface-elevation1); color: var(--content-highemphasis1); padding: 8px 16px; border-radius: 20px; font-size: 14px; font-weight: 600;">
+          📍 남은 질문: ${remaining}개
+        </span>
       </div>
 
       <!-- 하단 버튼 -->
-      <div class="footer">
-        <button id="btn-next-card" class="btn btn-primary" style="font-size: 16px; padding: 12px 24px;">
+      <div class="footer" style="display: flex; gap: 12px; justify-content: center;">
+        <button id="btn-end-game" class="btn btn-secondary" style="font-size: 14px; padding: 10px 20px;">
+          랜덤뽑기 종료
+        </button>
+        <button id="btn-next-card" class="btn btn-primary" style="font-size: 14px; padding: 10px 20px;">
           ${remaining > 0 ? '다음 카드 선택' : '게임 완료'}
         </button>
       </div>
@@ -95,6 +100,10 @@ function attachEventListeners() {
           setState('currentView', 'setup')
         }
       }
+    }
+
+    if (e.target.id === 'btn-end-game') {
+      setState('currentView', 'setup')
     }
   }
 
