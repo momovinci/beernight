@@ -66,8 +66,11 @@ function renderCards() {
  * 이벤트 리스너 등록
  */
 function attachEventListeners() {
-  // 카드 클릭
-  document.addEventListener('click', (e) => {
+  const app = document.getElementById('app')
+
+  // 이벤트 위임: app 컨테이너 내에서만 리스너 동작
+  const handleClick = (e) => {
+    // 카드 클릭
     if (e.target.classList.contains('question-card')) {
       const idx = parseInt(e.target.dataset.index)
 
@@ -86,5 +89,13 @@ function attachEventListeners() {
         setState('currentView', 'setup')
       }
     }
-  })
+  }
+
+  // app 컨테이너에 리스너 등록
+  app.addEventListener('click', handleClick)
+
+  // 뷰 변경 시 리스너 제거 (메모리 누수 방지)
+  return () => {
+    app.removeEventListener('click', handleClick)
+  }
 }

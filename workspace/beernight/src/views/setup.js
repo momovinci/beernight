@@ -145,8 +145,10 @@ function renderAnswererList() {
  * 이벤트 리스너 등록
  */
 function attachEventListeners() {
-  // 질문 입력
-  document.addEventListener('input', (e) => {
+  const app = document.getElementById('app')
+
+  // 입력 이벤트 핸들러
+  const handleInput = (e) => {
     if (e.target.classList.contains('question-input')) {
       const idx = parseInt(e.target.dataset.index)
       updateQuestion(idx, e.target.value)
@@ -156,10 +158,10 @@ function attachEventListeners() {
       const answerer = getState('answerers')[idx]
       updateAnswerer(idx, e.target.value, answerer.photo)
     }
-  })
+  }
 
-  // 질문 삭제
-  document.addEventListener('click', (e) => {
+  // 클릭 이벤트 핸들러
+  const handleClick = (e) => {
     if (e.target.classList.contains('question-delete')) {
       const idx = parseInt(e.target.dataset.index)
       removeQuestion(idx)
@@ -167,7 +169,6 @@ function attachEventListeners() {
       updateStartButtonState()
     }
 
-    // 답변자 삭제
     if (e.target.classList.contains('answerer-delete')) {
       const idx = parseInt(e.target.dataset.index)
       removeAnswerer(idx)
@@ -175,7 +176,6 @@ function attachEventListeners() {
       updateStartButtonState()
     }
 
-    // 답변자 사진 업로드
     if (e.target.classList.contains('answerer-photo-btn')) {
       const idx = parseInt(e.target.dataset.index)
       const fileInput = document.querySelector(
@@ -184,28 +184,25 @@ function attachEventListeners() {
       fileInput.click()
     }
 
-    // 질문 추가
     if (e.target.id === 'btn-add-question') {
       addQuestion('')
       renderQuestionList()
       updateStartButtonState()
     }
 
-    // 답변자 추가
     if (e.target.id === 'btn-add-answerer') {
       addAnswerer('', null)
       renderAnswererList()
       updateStartButtonState()
     }
 
-    // 게임 시작
     if (e.target.id === 'btn-start-game') {
       handleStartGame()
     }
-  })
+  }
 
-  // 답변자 사진 파일 선택
-  document.addEventListener('change', (e) => {
+  // 파일 선택 이벤트 핸들러
+  const handleChange = (e) => {
     if (e.target.classList.contains('answerer-photo-input')) {
       const idx = parseInt(e.target.dataset.index)
       const file = e.target.files[0]
@@ -216,12 +213,29 @@ function attachEventListeners() {
           const answerer = getState('answerers')[idx]
           updateAnswerer(idx, answerer.name, event.target.result)
           renderAnswererList()
-          attachEventListeners()
+          // 렌더링 후 새 리스너 재등록
+          attachNewListeners()
         }
         reader.readAsDataURL(file)
       }
     }
-  })
+  }
+
+  // 리스너 등록 (한 번만)
+  function attachNewListeners() {
+    // 기존 리스너 제거
+    app.removeEventListener('input', handleInput)
+    app.removeEventListener('click', handleClick)
+    app.removeEventListener('change', handleChange)
+
+    // 새로운 리스너 등록
+    app.addEventListener('input', handleInput)
+    app.addEventListener('click', handleClick)
+    app.addEventListener('change', handleChange)
+  }
+
+  // 초기 리스너 등록
+  attachNewListeners()
 }
 
 /**

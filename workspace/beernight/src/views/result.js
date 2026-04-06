@@ -69,7 +69,9 @@ export function renderResultView() {
  * 이벤트 리스너 등록
  */
 function attachEventListeners() {
-  document.addEventListener('click', (e) => {
+  const app = document.getElementById('app')
+
+  const handleClick = (e) => {
     if (e.target.id === 'btn-next-card') {
       const remaining = getRemainingQuestionsCount()
 
@@ -82,5 +84,13 @@ function attachEventListeners() {
         }
       }
     }
-  })
+  }
+
+  // app 컨테이너에만 리스너 등록
+  app.addEventListener('click', handleClick)
+
+  // 뷰 변경 시 리스너 제거
+  return () => {
+    app.removeEventListener('click', handleClick)
+  }
 }
