@@ -28,7 +28,7 @@ export function renderSetupView() {
       <div class="setup-two-column" style="display: grid; gap: 24px; margin-bottom: 24px;">
         <!-- 질문 섹션 (좌측) -->
         <section class="section">
-          <h2>질문 목록 (최소 1개)</h2>
+          <h2><span style="color: var(--content-helper2); margin-right: 8px;">💬</span>질문 목록 (최소 1개)</h2>
           <div id="questions-list" class="mb-4"></div>
           <button id="btn-add-question" class="btn btn-secondary">
             + 질문 추가
@@ -37,7 +37,7 @@ export function renderSetupView() {
 
         <!-- 답변자 섹션 (우측) -->
         <section class="section">
-          <h2>답변자 목록 (최소 2명)</h2>
+          <h2><span style="color: var(--content-helper2); margin-right: 8px;">👥</span>답변자 목록 (최소 2명)</h2>
           <div id="answerers-list" class="mb-4"></div>
           <button id="btn-add-answerer" class="btn btn-secondary">
             + 답변자 추가

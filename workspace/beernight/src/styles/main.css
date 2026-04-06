@@ -39,14 +39,18 @@ body {
 }
 
 .btn-secondary {
-  background-color: #4060ff0a;
+  background-color: transparent;
   color: var(--surface-secondary);
   border: var(--surface-secondary) 1px solid;
 }
 
+.btn-secondary:hover:not(:disabled) {
+  background-color: #4060ff0a;
+}
+
 .btn-delete {
   background-color: transparent;
-  color: var(--content-error);
+  color: var(--content-helper2);
   font-size: 20px;
   padding: 4px 8px;
   border: none;
