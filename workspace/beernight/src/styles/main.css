@@ -202,7 +202,7 @@ input[type="text"]:focus {
   object-fit: cover;
   border: 2px solid var(--border-primary);
   margin: 0 auto calc(var(--spacing-100) * 1px);
-  background-color: #e6edff;
+  background-color: #ececec;
 }
 
 .profile-name {
