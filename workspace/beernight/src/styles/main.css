@@ -1,0 +1,250 @@
+@import "tailwindcss";
+
+/* 기본 스타일 */
+body {
+  font-family: var(--font, 'Pretendard Variable');
+  background-color: var(--background-base);
+  color: var(--content-highemphasis1);
+}
+
+/* 버튼 스타일 */
+.btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: var(--weight-medium);
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.btn:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background-color: var(--surface-primary);
+  color: white;
+}
+
+.btn-secondary {
+  background-color: var(--surface-secondary);
+  color: white;
+}
+
+.btn-delete {
+  background-color: transparent;
+  color: var(--content-error);
+  font-size: 20px;
+  padding: 4px 8px;
+  border: 1px solid var(--border-error);
+  border-radius: 4px;
+}
+
+/* 입력 필드 */
+input[type="text"],
+input[type="file"] {
+  padding: 8px 12px;
+  border: 1px solid var(--border-base);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: var(--border-primary);
+  box-shadow: 0 0 0 2px rgba(249, 8, 115, 0.1);
+}
+
+/* 레이아웃 */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.header h1 {
+  font-size: calc(var(--size-700) * 1px);
+  font-weight: var(--weight-bold);
+  margin-bottom: 8px;
+}
+
+.footer {
+  margin-top: 32px;
+  text-align: center;
+  padding: 20px 0;
+}
+
+/* 섹션 */
+.section {
+  background-color: var(--surface-elevation1);
+  border: 1px solid var(--border-base);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.section h2 {
+  font-size: 18px;
+  font-weight: var(--weight-semi-bold);
+  margin-bottom: 16px;
+}
+
+/* 리스트 아이템 */
+.list-item {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 12px;
+  padding: 12px;
+  background-color: white;
+  border: 1px solid var(--border-base);
+  border-radius: 8px;
+}
+
+.list-item input {
+  flex: 1;
+}
+
+.list-item-delete {
+  flex-shrink: 0;
+}
+
+/* 그리드 */
+.grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* 카드 */
+.card {
+  background-color: white;
+  border: 1px solid var(--border-base);
+  border-radius: calc(var(--radius-200) * 1px);
+  padding: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card:hover:not(:disabled) {
+  background-color: var(--surface-default);
+  transform: translateY(-2px);
+}
+
+.card:disabled {
+  background-color: var(--surface-disabled);
+  color: var(--content-helper1);
+  cursor: not-allowed;
+}
+
+.card-number {
+  font-size: 32px;
+  font-weight: var(--weight-bold);
+  color: var(--content-highemphasis1);
+}
+
+/* 프로필 */
+.profile {
+  text-align: center;
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: calc(var(--radius-300) * 1px);
+  object-fit: cover;
+  border: 2px solid var(--border-primary);
+  margin: 0 auto calc(var(--spacing-100) * 1px);
+  background-color: var(--surface-elevation1);
+}
+
+.profile-name {
+  font-size: 18px;
+  font-weight: var(--weight-medium);
+  color: var(--content-highemphasis1);
+}
+
+/* 헬퍼 */
+.text-center {
+  text-align: center;
+}
+
+.text-secondary {
+  color: var(--content-helper1);
+  font-size: 14px;
+}
+
+.gap-4 {
+  gap: 16px;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.mb-4 {
+  margin-bottom: 16px;
+}
+
+.mb-6 {
+  margin-bottom: 24px;
+}
+
+.mt-4 {
+  margin-top: 16px;
+}
+
+.mt-8 {
+  margin-top: 32px;
+}

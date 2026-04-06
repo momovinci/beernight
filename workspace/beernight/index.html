@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beernight - 질문-답변자 게임</title>
+  <link rel="stylesheet" href="tokens/dist/tokens.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Pretendard Variable', system-ui, sans-serif;
+      background-color: var(--background-base);
+      color: var(--content-highemphasis1);
+      min-height: 100vh;
+    }
+
+    #app {
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    .view {
+      display: none;
+    }
+
+    .view.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

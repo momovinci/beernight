@@ -1,0 +1,20 @@
+{
+  "name": "beernight",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "tokens:seed": "node scripts/generate-flat-from-reference.mjs",
+    "tokens:validate": "node scripts/validate-tokens.mjs",
+    "tokens:build": "node scripts/build-tokens-css.mjs",
+    "tokens:check": "npm run tokens:validate && npm run tokens:build"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.0.13",
+    "tailwindcss": "^4.0.13",
+    "vite": "^5.4.11"
+  }
+}

@@ -1,0 +1,276 @@
+import {
+  getState,
+  setState,
+  addQuestion,
+  removeQuestion,
+  updateQuestion,
+  addAnswerer,
+  removeAnswerer,
+  updateAnswerer
+} from '../state.js'
+
+/**
+ * 설정 페이지 렌더링
+ */
+export function renderSetupView() {
+  const app = document.getElementById('app')
+  const questions = getState('questions')
+  const answerers = getState('answerers')
+
+  app.innerHTML = `
+    <div class="container">
+      <div class="header">
+        <h1>🍺 Beernight</h1>
+        <p class="text-secondary">질문과 답변자를 설정하고 게임을 시작하세요!</p>
+      </div>
+
+      <!-- 질문 섹션 -->
+      <section class="section">
+        <h2>질문 목록 (최소 1개)</h2>
+        <div id="questions-list" class="mb-4"></div>
+        <button id="btn-add-question" class="btn btn-secondary w-full">
+          + 질문 추가
+        </button>
+      </section>
+
+      <!-- 답변자 섹션 -->
+      <section class="section">
+        <h2>답변자 목록 (최소 2명)</h2>
+        <div id="answerers-list" class="mb-4"></div>
+        <button id="btn-add-answerer" class="btn btn-secondary w-full">
+          + 답변자 추가
+        </button>
+      </section>
+
+      <!-- 하단 버튼 -->
+      <div class="footer">
+        <button id="btn-start-game" class="btn btn-primary" style="font-size: 16px; padding: 12px 24px;">
+          게임 시작
+        </button>
+      </div>
+    </div>
+  `
+
+  // 질문 리스트 렌더링
+  renderQuestionList()
+
+  // 답변자 리스트 렌더링
+  renderAnswererList()
+
+  // 버튼 유효성 검사
+  updateStartButtonState()
+
+  // 이벤트 리스너 등록
+  attachEventListeners()
+}
+
+/**
+ * 질문 리스트 렌더링
+ */
+function renderQuestionList() {
+  const questions = getState('questions')
+  const container = document.getElementById('questions-list')
+
+  container.innerHTML = questions
+    .map(
+      (q, idx) => `
+        <div class="list-item">
+          <input
+            type="text"
+            class="question-input"
+            data-index="${idx}"
+            value="${q}"
+            placeholder="질문을 입력하세요"
+          />
+          <button class="btn btn-delete question-delete" data-index="${idx}">×</button>
+        </div>
+      `
+    )
+    .join('')
+}
+
+/**
+ * 답변자 리스트 렌더링
+ */
+function renderAnswererList() {
+  const answerers = getState('answerers')
+  const container = document.getElementById('answerers-list')
+
+  container.innerHTML = answerers
+    .map(
+      (a, idx) => `
+        <div class="list-item flex-col" style="align-items: flex-start;">
+          <div class="flex gap-4 w-full">
+            <div style="flex: 1;">
+              <input
+                type="file"
+                accept="image/*"
+                class="answerer-photo-input"
+                data-index="${idx}"
+                style="display: none;"
+              />
+              <button
+                class="btn btn-secondary answerer-photo-btn"
+                data-index="${idx}"
+                style="width: 100px; height: 100px; padding: 0; border-radius: 8px; overflow: hidden;"
+              >
+                ${
+                  a.photo
+                    ? `<img src="${a.photo}" style="width: 100%; height: 100%; object-fit: cover;" />`
+                    : '📸 사진'
+                }
+              </button>
+            </div>
+            <div style="flex: 3;">
+              <input
+                type="text"
+                class="answerer-name-input"
+                data-index="${idx}"
+                value="${a.name}"
+                placeholder="이름을 입력하세요"
+                style="width: 100%; margin-bottom: 8px;"
+              />
+              <button class="btn btn-delete answerer-delete" data-index="${idx}" style="width: 100%;">
+                삭제
+              </button>
+            </div>
+          </div>
+        </div>
+      `
+    )
+    .join('')
+}
+
+/**
+ * 이벤트 리스너 등록
+ */
+function attachEventListeners() {
+  // 질문 입력
+  document.addEventListener('input', (e) => {
+    if (e.target.classList.contains('question-input')) {
+      const idx = parseInt(e.target.dataset.index)
+      updateQuestion(idx, e.target.value)
+    }
+    if (e.target.classList.contains('answerer-name-input')) {
+      const idx = parseInt(e.target.dataset.index)
+      const answerer = getState('answerers')[idx]
+      updateAnswerer(idx, e.target.value, answerer.photo)
+    }
+  })
+
+  // 질문 삭제
+  document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('question-delete')) {
+      const idx = parseInt(e.target.dataset.index)
+      removeQuestion(idx)
+      renderQuestionList()
+      updateStartButtonState()
+    }
+
+    // 답변자 삭제
+    if (e.target.classList.contains('answerer-delete')) {
+      const idx = parseInt(e.target.dataset.index)
+      removeAnswerer(idx)
+      renderAnswererList()
+      updateStartButtonState()
+    }
+
+    // 답변자 사진 업로드
+    if (e.target.classList.contains('answerer-photo-btn')) {
+      const idx = parseInt(e.target.dataset.index)
+      const fileInput = document.querySelector(
+        `.answerer-photo-input[data-index="${idx}"]`
+      )
+      fileInput.click()
+    }
+
+    // 질문 추가
+    if (e.target.id === 'btn-add-question') {
+      addQuestion('')
+      renderQuestionList()
+      updateStartButtonState()
+    }
+
+    // 답변자 추가
+    if (e.target.id === 'btn-add-answerer') {
+      addAnswerer('', null)
+      renderAnswererList()
+      updateStartButtonState()
+    }
+
+    // 게임 시작
+    if (e.target.id === 'btn-start-game') {
+      handleStartGame()
+    }
+  })
+
+  // 답변자 사진 파일 선택
+  document.addEventListener('change', (e) => {
+    if (e.target.classList.contains('answerer-photo-input')) {
+      const idx = parseInt(e.target.dataset.index)
+      const file = e.target.files[0]
+
+      if (file) {
+        const reader = new FileReader()
+        reader.onload = (event) => {
+          const answerer = getState('answerers')[idx]
+          updateAnswerer(idx, answerer.name, event.target.result)
+          renderAnswererList()
+          attachEventListeners()
+        }
+        reader.readAsDataURL(file)
+      }
+    }
+  })
+}
+
+/**
+ * 게임 시작 처리
+ */
+function handleStartGame() {
+  const questions = getState('questions')
+  const answerers = getState('answerers')
+
+  // 유효성 검사
+  if (questions.length === 0) {
+    alert('최소 1개의 질문을 입력해주세요')
+    return
+  }
+
+  if (answerers.length < 2) {
+    alert('최소 2명의 답변자를 입력해주세요')
+    return
+  }
+
+  // 빈 질문 확인
+  if (questions.some(q => q.trim() === '')) {
+    alert('모든 질문을 입력해주세요')
+    return
+  }
+
+  // 빈 답변자 이름 확인
+  if (answerers.some(a => a.name.trim() === '')) {
+    alert('모든 답변자의 이름을 입력해주세요')
+    return
+  }
+
+  // 게임 시작
+  setState('currentView', 'game')
+}
+
+/**
+ * 게임 시작 버튼 상태 업데이트
+ */
+function updateStartButtonState() {
+  const btn = document.getElementById('btn-start-game')
+  const questions = getState('questions')
+  const answerers = getState('answerers')
+
+  const isValid =
+    questions.length > 0 &&
+    answerers.length >= 2 &&
+    questions.every(q => q.trim() !== '') &&
+    answerers.every(a => a.name.trim() !== '')
+
+  btn.disabled = !isValid
+}
