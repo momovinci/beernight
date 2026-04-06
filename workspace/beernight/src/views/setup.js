@@ -32,7 +32,7 @@ export function renderSetupView() {
         <section class="section">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
             <div style="flex: 1;">
-              <ion-icon name="chatbubble-ellipses-outline" style="font-size: 24px; color: var(--content-lowemphasis1); display: block; margin-bottom: 4px;"></ion-icon>
+              <div style="font-size: 24px; display: block; margin-bottom: 4px;">💬</div>
               <h2>질문 목록 (최소 1개)</h2>
             </div>
             <button id="btn-add-question" class="btn btn-secondary" style="white-space: nowrap; margin-left: 12px;">
@@ -46,7 +46,7 @@ export function renderSetupView() {
         <section class="section">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
             <div style="flex: 1;">
-              <ion-icon name="person-outline" style="font-size: 24px; color: var(--content-lowemphasis1); display: block; margin-bottom: 4px;"></ion-icon>
+              <div style="font-size: 24px; display: block; margin-bottom: 4px;">🙋</div>
               <h2>답변자 목록 (최소 2명)</h2>
             </div>
             <button id="btn-add-answerer" class="btn btn-secondary" style="white-space: nowrap; margin-left: 12px;">
