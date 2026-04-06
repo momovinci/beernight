@@ -45,7 +45,7 @@ body {
 }
 
 .btn-secondary:hover:not(:disabled) {
-  background-color: #4060ff0a;
+  background-color: #4060ff16;
 }
 
 .btn-delete {
