@@ -34,7 +34,7 @@ body {
 }
 
 .btn-primary {
-  background-color: var(--surface-primary);
+  background-color: var(--surface-secondary);
   color: white;
 }
 
@@ -56,7 +56,7 @@ body {
 .btn-photo {
   background-color: white;
   color: var(--content-helper1);
-  border: 2px dotted var(--border-base);
+  border: 1px solid var(--border-base);
 }
 
 /* 입력 필드 */
@@ -112,6 +112,7 @@ input[type="text"]:focus {
   font-size: 18px;
   font-weight: var(--weight-semi-bold);
   margin-bottom: 16px;
+  text-align: left;
 }
 
 /* 리스트 아이템 */

@@ -103,7 +103,7 @@ function renderAnswererList() {
     .map(
       (a, idx) => `
         <div class="list-item flex-col" style="position: relative; align-items: center;">
-          <button class="btn btn-delete answerer-delete" data-index="${idx}" style="position: absolute; top: 12px; right: 12px; width: auto; padding: 4px 8px;">×</button>
+          <button class="btn btn-delete answerer-delete" data-index="${idx}" style="position: absolute; top: -1px; right: 8px; width: auto; padding: 4px 8px;">×</button>
           <div class="flex gap-4 w-full" style="align-items: center;">
             <div style="flex: 0 0 auto;">
               <input
